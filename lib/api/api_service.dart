@@ -28,4 +28,24 @@ class ApiService {
       throw Exception("Faild to fetch products");
     }
   }
+
+  // fetch a single product from the API
+  Future<ProductModel> fetchSingleProduct(int id) async {
+    final String url = "https://fakestoreapi.com/products/$id";
+    try {
+      final responce = await http.get(Uri.parse(url));
+      if (responce.statusCode == 200) {
+        ProductModel product = ProductModel.fromjson(
+          json.decode(responce.body),
+        );
+        return product;
+      } else {
+        print("Faild to fetch product status code :${responce.statusCode}");
+        throw Exception("Faild to fetch product");
+      }
+    } catch (error) {
+      print("error :$error");
+      throw Exception("Feild to fatch product");
+    }
+  }
 }

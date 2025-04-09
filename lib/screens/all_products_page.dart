@@ -1,5 +1,6 @@
 import 'package:api/api/api_service.dart';
 import 'package:api/models/product_model.dart';
+import 'package:api/screens/single_product_page.dart';
 import 'package:flutter/material.dart';
 
 class AllProductsPage extends StatefulWidget {
@@ -43,7 +44,7 @@ class _AllProductsPageState extends State<AllProductsPage> {
                       ),
                       child: ListTile(
                         title: Text(product.title),
-                        subtitle: Text("\$ ${product.price}"),
+                        subtitle: Text("\$${product.price}"),
                         leading: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -55,6 +56,16 @@ class _AllProductsPageState extends State<AllProductsPage> {
                             fit: BoxFit.cover,
                           ),
                         ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) =>
+                                      SingleProductPage(productId: product.id!),
+                            ),
+                          );
+                        },
                       ),
                     );
                   },
